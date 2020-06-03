@@ -1,0 +1,79 @@
+<html>
+  <head>
+    <style>
+      .content {
+        width: 1000px;
+        height: 400px;
+        overflow: hidden;
+        margin: 100px auto;
+      }
+      .content ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+      }
+      .content li {
+        width: 100px;
+        height: 400px;
+      }
+
+      .content li img {
+        width: 780px;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content">
+      <ul>
+        <li>
+          <img src="img/1.png" alt="" />
+        </li>
+        <li>
+          <img src="img/2.png" alt="" />
+        </li>
+        <li>
+          <img src="img/3.png" alt="" />
+        </li>
+        <li>
+          <img src="img/4.png" alt="" />
+        </li>
+        <li>
+          <img src="img/5.png" alt="" />
+        </li>
+        <li>
+          <img src="img/6.png" alt="" />
+        </li>
+        <li>
+          <img src="img/7.png" alt="" />
+        </li>
+        <li>
+          <img src="img/8.png" alt="" />
+        </li>
+        <li>
+          <img src="img/9.png" alt="" />
+        </li>
+        <li>
+          <img src="img/10.png" alt="" />
+        </li>
+      </ul>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+      $(function () {
+        $("li").mouseover(function () {
+          $(this)
+            .stop()
+            .animate({ width: "640px" }) //1000-640 == 360
+            .siblings()
+            .stop()
+            .animate({ width: "40px" }); //360/9=40
+        });
+        $("li").mouseout(function () {
+          $("li").stop().animate({ width: "100px" });
+        });
+      });
+    </script>
+  </body>
+</html>

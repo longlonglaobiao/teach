@@ -1,0 +1,96 @@
+<html>
+  <head>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        width: 800px;
+        height: 350px;
+
+        margin: 100px auto;
+      }
+      .container ul {
+        list-style: none;
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+      .container li {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+      }
+      .arrow {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        position: relative;
+        top: -60%;
+        font-weight: 700;
+        font-size: 1.5em;
+        color: white;
+      }
+      .arrow > div {
+        padding: 5px;
+
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+      .arrow > div:hover {
+        cursor: pointer;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+      <div class="arrow">
+        <div>&lt;</div>
+        <div>&gt;</div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+      $(function () {
+        let lis = $(".container").find("li");
+        let count = 0;
+        console.log(lis);
+        for (let i = 0; i < lis.length; i++) {
+          $(lis[i]).css({
+            "background-image": `url(images/${i + 1}.jpg)`,
+            "background-size": "100% 100%",
+          });
+        }
+        $(".arrow")
+          .children("div")
+          .eq(0)
+          .click(function () {
+            count--;
+            if (count == -1) {
+              count = lis.length - 1;
+            }
+            lis.eq(count).fadeIn(1000).siblings().fadeOut(1000);
+          });
+
+        $(".arrow")
+          .children("div")
+          .eq(1)
+          .click(function () {
+            count++;
+            if (count == lis.length) {
+              count = 0;
+            }
+            lis.eq(count).fadeIn(1000).siblings().fadeOut(1000);
+          });
+      });
+    </script>
+  </body>
+</html>

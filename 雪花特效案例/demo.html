@@ -1,0 +1,63 @@
+<html>
+  <head>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: rgba(0, 0, 0, 0.6);
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        let w = $(window).width(); // 获取界面可视区域宽度
+        let h = $(window).height(); // 获取界面可视区域搞度
+        let body = $("body"); // 获取 body  元素
+        let rIdx;
+        let snow;
+        let snowImgs = [
+          "imgs/snow0.gif",
+          "imgs/snow1.gif",
+          "imgs/snow2.gif",
+          "imgs/snow3.gif",
+        ];
+        // 雪花尺寸
+        let sizes = [5, 8, 10, 12];
+
+        // 雪花摇摆的范围
+        let swing = w / 4;
+
+        setInterval(function () {
+          // 随机选取雪花图片
+          rIdx = Math.floor(Math.random() * 4);
+          // 雪花产生的位置
+          let pos = Math.floor(Math.random() * w); //0-1920
+          let swi = Math.floor(Math.random() * swing);
+
+          snow = $(`<img src="${snowImgs[rIdx]}">`).css({
+            position: "absolute",
+            width: sizes[rIdx], //`${sizes[rIdx]}px`,
+            left: pos, //`${pos}`,
+          });
+
+          snow.animate(
+            {
+              top: h + "px",
+              marginLeft: swi + "px",
+            },
+            8000,
+            "linear",
+            function () {
+              $(this).remove();
+            }
+          );
+          body.append(snow);
+        }, 20);
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,68 @@
+<html>
+  <head>
+    <title>轮播</title>
+    <style>
+      .content {
+        width: 200px;
+        height: 100px;
+        perspective: 500px;
+        margin: 300px;
+      }
+      ul {
+        list-style: none;
+        transform-style: preserve-3d;
+      }
+      li {
+        width: 80px;
+        height: 120px;
+        position: absolute;
+      }
+      img {
+        width: 80px;
+        height: 120px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content" id="content">
+      <ul></ul>
+    </div>
+    <script>
+      var imgs = [
+        "./src/s01.jpg",
+        "./src/s02.jpg",
+        "./src/s03.jpg",
+        "./src/s04.jpg",
+        "./src/s05.jpg",
+        "./src/s06.jpg",
+      ];
+
+      var dom = document.getElementById("content");
+      // 创建文档片段，主要是优化处理
+      var fragment = document.createDocumentFragment();
+      var rotates = [];
+      // 这个 for 循环主要是初始化图片的位置
+      for (var i = 0; i < imgs.length; i++) {
+        var li = document.createElement("li");
+        var img = document.createElement("img");
+        img.src = imgs[i];
+        li.appendChild(img);
+        rotates[i] = i * 60;
+        fragment.appendChild(li);
+      }
+      // 通过文档片段接入 DOM 树可以减少 重绘和回流
+      dom.getElementsByTagName("ul")[0].appendChild(fragment);
+      var lis = document.getElementsByTagName("li");
+      // 这个 for 循环开始让图片旋转起来
+      // 还需要注意这里的 let ，如果你要用 var 那么需要注意作用域的问题
+      for (let i = 0; i < lis.length; i++) {
+        setInterval(function () {
+          rotates[i]++;
+          lis[
+            i
+          ].style.transform = `rotateY(${rotates[i]}deg) translateZ(120px)`;
+        }, 30);
+      }
+    </script>
+  </body>
+</html>

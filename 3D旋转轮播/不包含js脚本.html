@@ -1,0 +1,99 @@
+<html>
+  <head>
+    <style>
+      .content {
+        width: 200px;
+        height: 100px;
+        margin: 100px;
+        perspective: 500px; /* 视距 */
+      }
+      ul {
+        list-style: none;
+        transform-style: preserve-3d; /* 设置 子元素 为 3D 呈现效果 */
+      }
+      li {
+        width: 90px;
+        height: 120px;
+        position: absolute; /* 设置定位：绝对定位 */
+        background-size: 100% 100%;
+      }
+      li:nth-child(1) {
+        /* rotateY 进行 Y 轴旋转 */
+        /* translateZ 进行 Z 轴移动 */
+        transform: rotateY(0deg) translateZ(100px);
+        /* animation 使用动画 */
+        /* 参数：动画名称、一次动画完成的时间、动画的执行方式（linear 平滑）、动画的执行次数 */
+        animation: rota-1 6s linear infinite;
+        background-image: url(src/s01.jpg);
+      }
+      li:nth-child(2) {
+        transform: rotateY(60deg) translateZ(100px);
+        animation: rota-2 6s linear infinite;
+        background-image: url(src/s02.jpg);
+      }
+      li:nth-child(3) {
+        transform: rotateY(120deg) translateZ(100px);
+        animation: rota-3 6s linear infinite;
+        background-image: url(src/s03.jpg);
+      }
+      li:nth-child(4) {
+        transform: rotateY(180deg) translateZ(100px);
+        animation: rota-4 6s linear infinite;
+        background-image: url(src/s04.jpg);
+      }
+      li:nth-child(5) {
+        transform: rotateY(240deg) translateZ(100px);
+        animation: rota-5 6s linear infinite;
+        background-image: url(src/s05.jpg);
+      }
+      li:nth-child(6) {
+        transform: rotateY(300deg) translateZ(100px);
+        animation: rota-6 6s linear infinite;
+        background-image: url(src/s06.jpg);
+      }
+      @keyframes rota-1 {
+        to {
+          /* 旋转 360 deg */
+          transform: rotateY(360deg) translateZ(100px);
+        }
+      }
+      @keyframes rota-2 {
+        to {
+          transform: rotateY(420deg) translateZ(100px);
+        }
+      }
+      @keyframes rota-3 {
+        to {
+          transform: rotateY(480deg) translateZ(100px);
+        }
+      }
+      @keyframes rota-4 {
+        to {
+          transform: rotateY(540deg) translateZ(100px);
+        }
+      }
+      @keyframes rota-5 {
+        to {
+          transform: rotateY(600deg) translateZ(100px);
+        }
+      }
+      @keyframes rota-6 {
+        to {
+          transform: rotateY(660deg) translateZ(100px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content">
+      <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+  </body>
+</html>

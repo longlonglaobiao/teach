@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <style>
+      .tip {
+        width: 5px;
+        height: 5px;
+        position: absolute;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="jq.js"></script>
+    <script>
+      $(document).ready(function () {
+        $(window).click(function (e) {
+          // e 代表事件 本身
+          let left = e.clientX; //
+          let top = e.clientY;
+
+          let base = $("<div></div>").addClass("tip");
+          for (let i = 0; i < 6; i++) {
+            let r = Math.floor(Math.random() * 255);
+            let g = Math.floor(Math.random() * 255);
+            let b = Math.floor(Math.random() * 255);
+
+            let w = 30 - Math.floor(Math.random() * 60); // -30 ~ 30
+            let h = 20 + Math.floor(Math.random() * 20); //20--40
+
+            let tip = base
+              .clone()
+              .css({
+                "background-color": `rgb(${r},${g},${b})`,
+                left: `${left}px`,
+                top: `${top}px`,
+              })
+              .animate({ top: `${top - h}px`, left: `${left + w}px` }, 500)
+              .animate(
+                { top: `${top + 500}px`, opacity: 0 },
+                1000,
+                function () {
+                  $(this).remove();
+                }
+              );
+
+            $("body").append(tip);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
