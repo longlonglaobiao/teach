@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <h1>
+      登录之后详情页
+    </h1>
+    <p id="detail"></p>
+    <script>
+      let xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          console.log(xhr.responseText);
+          document.getElementById("detail").innerHTML = xhr.responseText;
+        }
+      };
+
+      xhr.open("GET", "/getdetail", true);
+
+      if ((token = localStorage.getItem("token"))) {
+        // 设置认证
+        xhr.setRequestHeader("Authorization", token);
+      }
+      xhr.send(null);
+    </script>
+  </body>
+</html>

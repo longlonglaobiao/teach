@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <ul id="list">
+      <li>
+        <span></span>
+        &emsp; &emsp;
+        <span></span>
+      </li>
+    </ul>
+    <script>
+      let xhr = new XMLHttpRequest();
+      // 也完全可以在前端指定返回格式
+      // xhr.overrideMimeType("text/xml")
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          let sHtml = "";
+
+          let res = JSON.parse(xhr.responseText);
+          console.log(res);
+          for (let i = 0; i < res.length; i++) {
+            sHtml += `
+              <li>
+                <img src="${res[i].imgUrl}"></img>
+                &emsp; &emsp;
+                <span>${res[i].title}</span>
+              </li>
+              `;
+          }
+          document.getElementById("list").innerHTML = sHtml;
+        }
+      };
+
+      // 异步
+      xhr.open("GET", "http://127.0.0.1:3000/api/data", true);
+      xhr.send(null);
+    </script>
+  </body>
+</html>

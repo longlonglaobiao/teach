@@ -1,0 +1,78 @@
+<html>
+  <body>
+    <h1>AJAX</h1>
+    <script>
+      ajax({
+        url: "/aj",
+        data: {
+          name: "小明",
+          age: 13,
+        },
+        datatype: "jsonp",
+        jsonp: "cb", // 当然这个 cb 名称需要跟后端配合，协同
+        success: (res) => {
+          console.log(res);
+        },
+      });
+
+      function ajax(options) {
+        // 通过对象合并，将数据传入 ajax
+        let opts = Object.assign(
+          {
+            url: "",
+            method: "get",
+            data: "",
+            async: true,
+            success: function () {},
+          },
+          options
+        );
+
+        function obj_url(obj) {
+          let keys = Object.keys(obj);
+          let values = Object.values(obj);
+          return keys.map((v, k) => `${v}=${values[k]}`).join("&");
+        }
+
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+          if (xhr.status === 200 && xhr.readyState === 4) {
+            if (opts.datatype === "json") {
+              try {
+                opts.success(JSON.parse(xhr.responseText));
+              } catch {
+                opts.success(xhr.responseText);
+              }
+            } else {
+              opts.success(xhr.responseText);
+            }
+          }
+        };
+
+        if (opts.method.toLowerCase() === "get") {
+          let query = !!opts.data ? obj_url(opts.data) : "";
+
+          if (opts.datatype === "jsonp") {
+            let fnName = "bi_" + Math.random().toString().substr(2);
+            // 让最终执行的回调又回到 success
+            window[fnName] = opts.success;
+            query = !!query ? query + "&" : query;
+            let path = opts.url + "?" + query + opts.jsonp + "=" + fnName;
+            let sci = document.createElement("script");
+            sci.src = path;
+            document.querySelector("head").appendChild(sci);
+
+            // 临时标签用完了 就删了
+            sci.parentNode.removeChild(sci);
+          } else {
+            xhr.open(opts.method, opts.url + "?" + query, opts.async);
+            xhr.send(null);
+          }
+        } else if (opts.method.toLowerCase() === "post") {
+          xhr.open(opts.method, opts.url, opts.async);
+          xhr.send(opts.data);
+        }
+      }
+    </script>
+  </body>
+</html>

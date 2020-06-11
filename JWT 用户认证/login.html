@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <h1>
+      JWT 案例
+    </h1>
+    <p>
+      <label for="username"> 用户名：</label>
+      <input type="text" id="username" />
+    </p>
+    <p>
+      <label for="pwd"> 密&emsp;码：</label>
+      <input type="password" id="pwd" />
+    </p>
+    <p>
+      <button onclick="submit()">提交</button>
+    </p>
+    <script>
+      function submit() {
+        let username = document.getElementById("username").value;
+        let pwd = document.getElementById("pwd").value;
+        let userInfo = {
+          username: username,
+          pwd: pwd,
+        };
+
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+          if (xhr.status == 200 && xhr.readyState == 4) {
+            let res = JSON.parse(xhr.responseText);
+            if (res.token) {
+              // 当然可以不仅仅设置在 localStorage 中，也可以设置在 cookie 中
+              localStorage.setItem("token", res.token);
+            }
+          }
+        };
+        xhr.open("POST", "/checkLogin", true);
+
+        xhr.send(JSON.stringify(userInfo));
+      }
+    </script>
+  </body>
+</html>
