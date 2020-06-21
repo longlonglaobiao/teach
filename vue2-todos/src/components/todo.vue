@@ -4,12 +4,11 @@
       <div slot="header" class="clearfix">
         <el-input
           autofocus="autofocus"
-          placeholder="请输入内容"
+          placeholder="press  enter  to  end"
           v-model="input"
           clearable
           @keyup.enter.native="addTodo"
-        >
-        </el-input>
+        ></el-input>
       </div>
       <tabs @tab="tabChange"></tabs>
       <Item
@@ -33,30 +32,30 @@ export default {
     return {
       input: "",
       todos: [],
-      filter: "all",
+      filter: "all"
     };
   },
   components: {
     Item,
     tabs,
-    Footer,
+    Footer
   },
   computed: {
     filterTodos() {
       if (this.filter === "all") {
         return this.todos;
       } else if (this.filter === "active") {
-        return this.todos.filter((tab) => !tab.completed);
+        return this.todos.filter(tab => !tab.completed);
       } else {
-        return this.todos.filter((tab) => tab.completed);
+        return this.todos.filter(tab => tab.completed);
       }
     },
     lenObj() {
       return {
         all: this.todos.length,
-        completed: this.todos.filter((tab) => tab.completed).length,
+        completed: this.todos.filter(tab => tab.completed).length
       };
-    },
+    }
   },
   methods: {
     addTodo() {
@@ -65,14 +64,14 @@ export default {
         this.todos.unshift({
           id: id++,
           title: title,
-          completed: false,
+          completed: false
         });
       }
       this.input = "";
     },
     delItem(id) {
       this.todos.splice(
-        this.todos.findIndex((todo) => todo.id === id),
+        this.todos.findIndex(todo => todo.id === id),
         1
       );
     },
@@ -80,13 +79,13 @@ export default {
       this.filter = tab;
     },
     changeTodo(id) {
-      let idx = this.todos.findIndex((todo) => todo.id === id);
+      let idx = this.todos.findIndex(todo => todo.id === id);
       this.todos[idx].completed = !this.todos[idx].completed;
     },
     clear() {
-      this.todos = this.todos.filter((todo) => !todo.completed);
-    },
-  },
+      this.todos = this.todos.filter(todo => !todo.completed);
+    }
+  }
 };
 </script>
 
