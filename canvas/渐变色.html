@@ -1,0 +1,18 @@
+<html>
+  <body>
+    <canvas id="ctx"> </canvas>
+    <script>
+      let canvas = document.getElementById("ctx");
+      canvas.width = 500;
+      canvas.height = 500;
+      let ctx = canvas.getContext("2d");
+      // 线性渐变开始结束
+      let gr = ctx.createLinearGradient(100, 100, 200, 200);
+      gr.addColorStop(0, "red");
+      gr.addColorStop(0.5, "yellow");
+      gr.addColorStop(1, "green");
+      ctx.fillStyle = gr;
+      ctx.fillRect(0, 0, 300, 300);
+    </script>
+  </body>
+</html>

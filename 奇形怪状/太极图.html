@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <style>
+      .container {
+        width: 0px;
+        height: 300px;
+        border-left: 150px solid black;
+        border-right: 150px solid white;
+        border-radius: 50%;
+        /* box-shadow 阴影，三个属性分别是 左偏移，下偏移 ，阴影面积 */
+        box-shadow: 0px 0px 36px;
+      }
+      .container::before {
+        content: "";
+        width: 50px;
+        height: 50px;
+        border: 50px solid white;
+        /* 不受限制  absolute 绝对定位 */
+        position: absolute;
+        border-radius: 50%;
+        margin-left: -75px;
+        background-color: black;
+      }
+      .container::after {
+        content: "";
+        width: 50px;
+        height: 50px;
+        border: 50px solid black;
+        /* 不受限制  absolute 绝对定位 */
+        position: absolute;
+        border-radius: 50%;
+        margin-left: -75px;
+        margin-top: 150px;
+        background-color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container"></div>
+  </body>
+</html>

@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <style>
+      #cvs {
+        background-color: white;
+        border: 1px solid;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="cvs"></canvas>
+    <script>
+      const canvas = document.getElementById("cvs");
+      canvas.width = 300;
+      canvas.height = 300;
+
+      // canvas 上下文对象， 画笔
+      const ctx = canvas.getContext("2d");
+      // 填充色
+      ctx.fillStyle = "green";
+      // 描边宽度
+      ctx.lineWidth = 10;
+      // 描边颜色
+      ctx.strokeStyle = "blue";
+      // 填充矩形矩形
+      ctx.fillRect(0, 0, 100, 100);
+      // 描边矩形
+      ctx.strokeRect(100, 100, 100, 100);
+      // 清理矩形，可以发现描边矩形的内边框没了
+      ctx.clearRect(100, 100, 100, 100);
+    </script>
+  </body>
+</html>
